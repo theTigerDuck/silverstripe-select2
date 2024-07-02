@@ -2,15 +2,16 @@
 
 namespace Sheadawson\Select2;
 
+use Page;
+use Sheadawson\requirements\RequirementsTrait;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Convert;
+use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\View\Requirements;
 use SilverStripe\View\SSViewer;
-use SilverStripe\Core\Manifest\ModuleLoader;
-use Page;
 
 /**
  * A dropdown field with ajax loaded options list, uses jquery select2
@@ -19,6 +20,8 @@ use Page;
  **/
 class AjaxSelect2Field extends TextField
 {
+    use RequirementsTrait;
+
     private static $allowed_actions = array('search');
 
     protected $config = array(
@@ -36,10 +39,7 @@ class AjaxSelect2Field extends TextField
 
     public function Field($properties = array())
     {
-        Requirements::javascript('silverstripe/admin: thirdparty/jquery/jquery.js');
-        Requirements::javascript('silverstripe/admin: thirdparty/jquery-entwine/dist/jquery.entwine-dist.js');
-        Requirements::javascript('sheadawson/silverstripe-select2: select2/select2.js');
-        Requirements::javascript('sheadawson/silverstripe-select2: javascript/ajaxselect2.init.js');
+        $this->requireAppFiles();
         Requirements::css('sheadawson/silverstripe-select2: select2/select2.min.css');
 
         return parent::Field($properties);

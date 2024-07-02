@@ -4,6 +4,7 @@ namespace Sheadawson\Select2;
 
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\View\Requirements;
+use Sheadawson\requirements\RequirementsTrait;
 
 /**
  * Select2Field Definition
@@ -13,6 +14,7 @@ use SilverStripe\View\Requirements;
  */
 class Select2Field extends DropdownField
 {
+    use RequirementsTrait;
     /**
      * @var int The number of items that need to appear in the dropdown
      * in order to trigger a search bar
@@ -31,10 +33,7 @@ class Select2Field extends DropdownField
 
     public function Field($properties = array())
     {
-        Requirements::javascript('silverstripe/admin: thirdparty/jquery/jquery.js');
-        Requirements::javascript('silverstripe/admin: thirdparty/jquery-entwine/dist/jquery.entwine-dist.js');
-        Requirements::javascript('sheadawson/silverstripe-select2: select2/select2.js');
-        Requirements::javascript('sheadawson/silverstripe-select2: javascript/ajaxselect2.init.js');
+        $this->requireAppFiles();
         Requirements::css('sheadawson/silverstripe-select2: select2/select2.css');
         $this->addExtraClass('select2')->addExtraClass('no-chzn');
 

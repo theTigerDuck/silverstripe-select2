@@ -2,17 +2,17 @@
 
 namespace Sheadawson\Select2;
 
+use Sheadawson\requirements\RequirementsTrait;
 use SilverStripe\Forms\GroupedDropdownField;
 use SilverStripe\View\Requirements;
 
 class GroupedSelect2Field extends GroupedDropdownField
 {
+    use RequirementsTrait;
+
     public function Field($properties = array())
     {
-        Requirements::javascript('silverstripe/admin: thirdparty/jquery/jquery.js');
-        Requirements::javascript('silverstripe/admin: thirdparty/jquery-entwine/dist/jquery.entwine-dist.js');
-        Requirements::javascript('sheadawson/silverstripe-select2: select2/select2.js');
-        Requirements::javascript('sheadawson/silverstripe-select2: javascript/ajaxselect2.init.js');
+        $this->requireAppFiles();
         Requirements::css('sheadawson/silverstripe-select2: select2/select2.min.css');
 
         $this->addExtraClass('select2')->addExtraClass('no-chzn');
