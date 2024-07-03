@@ -18,6 +18,7 @@ trait RequirementsTrait
 
         Requirements::javascript('silverstripe/admin: thirdparty/jquery-query/jquery.query.js');
         Requirements::javascript('silverstripe/admin: thirdparty/jquery-entwine/jquery.entwine.js');
+        Requirements::javascript('sheadawson/silverstripe-select2: javascript/select2.init.js');
         Requirements::javascript('sheadawson/silverstripe-select2: select2/select2.js');
         Requirements::javascript('sheadawson/silverstripe-select2: javascript/ajaxselect2.init.js');
     }
