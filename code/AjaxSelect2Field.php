@@ -72,7 +72,7 @@ class AjaxSelect2Field extends TextField
         );
 
         $originalSourceFileComments = Config::inst()->get('SSViewer', 'source_file_comments');
-        Config::inst()->update('SSViewer', 'source_file_comments', false);
+        Config::modify()->set('SSViewer', 'source_file_comments', false);
         foreach ($results as $object) {
             $return['list'][] = array(
                 'id' => $object->ID,
@@ -80,9 +80,9 @@ class AjaxSelect2Field extends TextField
                 'selectionContent' => SSViewer::fromString($this->getConfig('selectionFormat'))->process($object)
             );
         }
-        Config::inst()->update('SSViewer', 'source_file_comments', $originalSourceFileComments);
+        Config::modify()->set('SSViewer', 'source_file_comments', $originalSourceFileComments);
 
-        return Convert::array2json($return);
+        return json_encode($return);
     }
 
     public function setConfig($k, $v)
@@ -116,9 +116,9 @@ class AjaxSelect2Field extends TextField
 
         if ($this->Value() && $object = DataObject::get($this->getConfig('classToSearch'))->byID($this->Value())) {
             $originalSourceFileComments = Config::inst()->get('SSViewer', 'source_file_comments');
-            Config::inst()->update('SSViewer', 'source_file_comments', false);
+            Config::modify()->set('SSViewer', 'source_file_comments', false);
             $attributes['data-selectioncontent'] = html_entity_decode(SSViewer::fromString($this->getConfig('selectionFormat'))->process($object));
-            Config::inst()->update('SSViewer', 'source_file_comments', $originalSourceFileComments);
+            Config::modify()->set('SSViewer', 'source_file_comments', $originalSourceFileComments);
         }
 
         return $attributes;
